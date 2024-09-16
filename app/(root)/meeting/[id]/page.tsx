@@ -11,6 +11,7 @@ const Meeting = ({ params: { id } }: { params: { id: string } }) => {
   const { user, isLoaded } = useUser();
   const [isSetUpComplete, setIsSetUpComplete] = useState(false);
   const { call, isCallLoading } = useGetCallById(id);
+  // console.log(user, isCallLoading, isLoaded);
   if (!isLoaded || !isCallLoading) return <Loader />;
   return (
     <main className="h-screen w-full">

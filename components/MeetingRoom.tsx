@@ -1,5 +1,5 @@
 import React from "react";
 
 export const MeetingRoom = () => {
-  return <div>MeetingRoom</div>;
+  return <div className="text-white font-bold text-3xl">MeetingRoom</div>;
 };

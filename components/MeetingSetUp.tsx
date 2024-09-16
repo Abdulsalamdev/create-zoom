@@ -1,5 +1,6 @@
 "use client";
 import {
+  Call,
   DeviceSettings,
   useCall,
   VideoPreview,
@@ -14,22 +15,21 @@ export const MeetingSetUp = ({
 }) => {
   const [isMicCamToggledOn, setIsMicCamToggledOn] = useState(false);
 
-  //   const call = useCall();
+  const call: Call | undefined = useCall();
 
-  //   if (!call) {
-  //     throw new Error(
-  //       "useStreamCall must be used within a StreamCall component."
-  //     );
-  //   }
-  //   useEffect(() => {
-  //     if (isMicCamToggledOn) {
-  //       call?.camera.disable();
-  //       call?.microphone.disable();
-  //     } else {
-  //       call?.camera.enable();
-  //       call?.microphone.enable();
-  //     }
-  //   }, [isMicCamToggledOn, call?.camera, call?.microphone]);
+  if (!call) {
+    throw new Error("useCall must be used within a StreamCall component.");
+  }
+
+  useEffect(() => {
+    if (isMicCamToggledOn) {
+      call?.camera.disable();
+      call?.microphone.disable();
+    } else {
+      call?.camera.enable();
+      call?.microphone.enable();
+    }
+  }, [isMicCamToggledOn, call?.camera, call?.microphone]);
   return (
     <div className="flex flex-col h-screen w-full text-white items-center justify-center">
       <h1 className="text-2xl font-bold">Setup</h1>
@@ -48,7 +48,7 @@ export const MeetingSetUp = ({
       <Button
         className="rounded-md bg-green-500 px-4 py-2.5"
         onClick={() => {
-          //   call.join();
+          call?.join();
           setIsSetUpComplete(true);
         }}
       >
